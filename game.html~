@@ -1,0 +1,68 @@
+<script>
+let choiceArray = ['Rock', 'Paper', 'Scissors']
+
+
+function capitalizeFirst(word) {
+	return word[0].toUpperCase() + word.slice(1);
+}
+function computerPlay() {
+	return choiceArray[Math.floor(Math.random() * 3)];
+}
+
+function playGame(playerSelection, computerSelection) {
+	playerSelection = capitalizeFirst(playerSelection);
+	computerSelection = capitalizeFirst(computerSelection);
+
+
+	console.log(computerSelection);
+	console.log(playerSelection);
+	let pIndex = choiceArray.indexOf(playerSelection);
+	let cIndex = choiceArray.indexOf(computerSelection);
+
+	let diff = Math.abs(pIndex - cIndex);
+
+	return findResult(diff, playerSelection, computerSelection);
+}
+
+function findResult(diff, pSel, cSel) {
+	switch(diff) {
+		case 0:
+		return "You Tie! " + pSel + " ties with " + cSel;
+		break;
+		case 1:
+		return "You Win! " + pSel + " beats " + cSel;
+		break;
+		case 2:
+		return "You Lose!" + pSel + " loses to " + cSel;
+		break;
+	}
+}
+
+function game() {
+	let score = 0;
+	for (let i = 0; i < 5; i++) {
+		let pInput = prompt("Please enter a selection.");
+		let cInput = computerPlay();
+
+		let result = playGame(pInput, cInput);
+
+		console.log(result);
+		if (result.search("Win") != -1) {
+			score++;
+		} else if (result.search("Lose") != -1) {
+			score--;
+		}
+	}
+
+	if (score == 0) {
+		console.log("You tied.");
+
+	} else if (score > 0) {
+		console.log("You won");
+	} else {
+		console.log("You lost.");
+	}
+}
+
+game()
+</script>
